@@ -16,7 +16,6 @@
   },
   "scripts": {
     "start": "gulp browser-sync",
-    "debug": "gulp browser-sync --debug",
     "build": "gulp build",
     "client_js": "gulp client_js",
     "lint": "jshint"
@@ -39,7 +38,6 @@
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-jshint": "^2.0.4",
-    "gulp-node-inspector": "^0.2.0",
     "gulp-nodemon": "^2.2.1",
     "gulp-sourcemaps": "^2.6.0",
     "gulp-util": "^3.0.8",
