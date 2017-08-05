@@ -1,166 +1,34 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Powered by GLOV.js</title>
+    <title>Example</title>
     <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1">
-    <meta name="Description" content="Something useful here for Google" />
-    <script src="vendor/jquery-1.11.3.min.js"></script>
+    <meta name="Description" content="Put something useful here" />
+    <script src="vendor/jquery-3.2.1.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="main.css">
   </head>
   <body>
     <div id="debug"></div>
     <div id="content">
-      <canvas id="turbulenz_game_engine_canvas" moz-opaque="true" tabindex="1">
+      <canvas id="my_canvas" moz-opaque="true" tabindex="1">
         Sorry, but your browser does not support WebGL or does not have it
         enabled.  To get a WebGL-enabled browser, please see:<br/>
         <a href="http://www.khronos.org/webgl/wiki/Getting_a_WebGL_Implementation" target="_blank">
           Getting a WebGL Implementation
         </a>
       </canvas>
-      <div id="gamescreen" class="screenwrap">
-        <div id="loading" class="screen vflex" style="display: none;">
-          <div class="flexcenter" style="text-align: center;">
-            <h1>Drone Supervisor</h1>
-          </div>
-          <div class="flexcenter" style="flex:3; text-align: center;" id="loading">
-            Loading...
-          </div>
-        </div>
-        <div id="title" class="screen vflex" style="display: none;">
-          <div class="flexcenter" style="text-align: center;">
-            <h1>Powered by GLOV.js</h1>
-          </div>
-          <div class="flexcenter" style="flex:3; text-align: center;"></div>
-        </div>
-      </div>
+      <!--
       <div id="fullscreen" class="screenwrap">
-        <div id="play" class="screen vflex" style="display: none;">
+        <div id="play" class="screen vflex">
           <div class="flexcenter" style="flex:1; text-align: center;"></div>
-          <div class="hflex" id="something">...</div>
+          <div class="hflex" id="something">Maybe put UI here</div>
           <div class="flexcenter" style="flex:1; text-align: center;"></div>
         </div>
       </div>
-      <script type="text/javascript">
-        (function () {
-          var debug = document.getElementById('debug');
-          window.onerror = function (e, file, line) {
-            debug.innerText = e + '\n  at ' + file + '(' + line + ')';
-          };
-        }());
-      </script>
-      <script type="text/javascript">
-        /*jshint browser: true*/
-        var canvasSupported = true;
-        (function() {
-          var contextNames = ['webgl', 'experimental-webgl'];
-          var context = null;
-          var canvas = document.createElement('canvas');
-
-          document.body.appendChild(canvas);
-
-          for (var i = 0; i < contextNames.length; i += 1) {
-            try {
-              context = canvas.getContext(contextNames[i]);
-            } catch (e) {}
-
-            if (context) {
-              break;
-            }
-          }
-          if (!context)
-          {
-            canvasSupported = false;
-            window.alert('Sorry, but your browser does not support WebGL or does not have it enabled.');
-          }
-
-          document.body.removeChild(canvas);
-        }());
-        var TurbulenzEngine = {};
-      </script>
+      -->
     </div>
 
-    <script src="vendor/jslib/debug.js"></script>
-    <script src="vendor/jslib/webgl/turbulenzengine.js"></script>
-    <script src="vendor/jslib/webgl/graphicsdevice.js"></script>
-    <script src="vendor/jslib/webgl/touch.js"></script>
-    <script src="vendor/jslib/webgl/touchevent.js"></script>
-    <script src="vendor/jslib/webgl/sounddevice.js"></script>
-    <script src="vendor/jslib/webgl/inputdevice.js"></script>
-    <script src="vendor/jslib/camera.js"></script>
-    <script src="vendor/jslib/vmath.js"></script>
-    <script src="vendor/jslib/utilities.js"></script>
-    <script src="vendor/jslib/observer.js"></script>
-    <script src="vendor/jslib/requesthandler.js"></script>
-    <script src="vendor/jslib/texturemanager.js"></script>
-    <script src="vendor/jslib/webgl/mathdevice.js"></script>
-    <script src="vendor/jslib/draw2d.js"></script>
-
-    <script src="main.bundle.js"></script>
-
-    <script type="text/javascript">
-      /*global WebGLTurbulenzEngine*/
-      window.assert = function(exp) {
-        if (!exp) {
-          console.log(new Error().stack);
-          window.alert('assertion failed');
-        }
-      };
-      // Embedded code and startup code.
-      window.onload = function () {
-        var appEntry = TurbulenzEngine.onload;
-        var appShutdown = TurbulenzEngine.onunload;
-        if (!appEntry) {
-          window.alert('TurbulenzEngine.onload has not been set');
-          return;
-        }
-
-        var canvas = document.getElementById('turbulenz_game_engine_canvas');
-        canvas.focus();
-
-        function resizeCanvas() {
-          var css_to_real = window.devicePixelRatio || 1;
-
-          canvas.width = Math.floor(canvas.clientWidth * css_to_real);
-          canvas.height = Math.floor(canvas.clientHeight * css_to_real);
-
-          // This used to be here, but it breaks mobile devices!
-          // Might be needed to get gamepad input though?
-          //canvas.focus();
-
-          // may force trigger immediate draw too?
-          window.need_repos = 10;
-        }
-        // resize the canvas to fill browser window dynamically
-        window.addEventListener('resize', resizeCanvas, false);
-        resizeCanvas();
-
-        var startCanvas = function startCanvasFn() {
-          if (canvas.getContext && canvasSupported) {
-            TurbulenzEngine = WebGLTurbulenzEngine.create({
-              canvas: canvas,
-              fillParent: true
-            });
-
-            if (!TurbulenzEngine) {
-              window.alert('Failed to init TurbulenzEngine (canvas)');
-              return;
-            }
-
-            TurbulenzEngine.onload = appEntry;
-            TurbulenzEngine.onunload = appShutdown;
-            appEntry();
-          }
-        };
-
-        window.onbeforeunload = function () {
-          if (TurbulenzEngine.onunload) {
-            TurbulenzEngine.onunload.call(this);
-          }
-        };  // window.beforeunload
-
-        startCanvas();
-      };  // window.onload()
-    </script>
+    <script src="wrapper.bundle.js"></script>
   </body>
 </html>

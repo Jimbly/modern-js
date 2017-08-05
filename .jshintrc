@@ -47,5 +47,6 @@
   "sub": false,
   "supernew": false,
   "validthis": false,
-  "node": true
+  "node": false,
+  "browser": true
 }

@@ -70,7 +70,7 @@ gulp.task('client_static', function () {
 
 (function () {
   var customOpts = {
-    entries: ['./src/client/main.js'],
+    entries: ['./src/client/wrapper.js'],
     debug: true
   };
   var opts = _.assign({}, watchify.args, customOpts);
@@ -78,7 +78,7 @@ gulp.task('client_static', function () {
     return b.bundle()
       // log errors if they happen
       .on('error', gutil.log.bind(gutil, 'Browserify Error'))
-      .pipe(source('main.bundle.js'))
+      .pipe(source('wrapper.bundle.js'))
       // optional, remove if you don't need to buffer file contents
       .pipe(buffer())
       // optional, remove if you dont want sourcemaps
