@@ -141,7 +141,11 @@ function babelBrfs(filename, opts) {
     entries: ['./src/client/wrapper.js'],
     cache: {}, // required for watchify
     packageCache: {}, // required for watchify
-    builtins: { assert: './src/client/assert.js' }, // super-simple assert replacement
+    builtins: {
+      // super-simple replacements, if needed
+      assert: './src/client/shims/assert.js',
+      timers: './src/client/shims/timers.js',
+    },
     debug: true,
     transform: [babelBrfs]
   };
