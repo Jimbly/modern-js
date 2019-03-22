@@ -1,13 +1,15 @@
-// jQuery: /*global $: false */
-/*global assert: false */
+const assert = require('assert');
+const example = require('./example.js');
 
 export let total_time = 0;
 export let canvas = null;
 
 export function main(canvas_in) {
-  const example = require('./example.js');
   assert(canvas_in);
   canvas = canvas_in;
+  let loading = document.getElementById('loading');
+  loading.style.visibility = 'hidden';
+
   let last_frame = Date.now();
   function tick() {
     let now = Date.now();

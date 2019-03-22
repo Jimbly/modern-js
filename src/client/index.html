@@ -4,30 +4,28 @@
     <title>Example</title>
     <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1">
     <meta name="Description" content="Put something useful here" />
-    <script src="vendor/jquery-3.2.1.min.js"></script>
-
     <link rel="stylesheet" type="text/css" href="main.css">
   </head>
   <body>
     <div id="debug"></div>
     <div id="content">
-      <canvas id="my_canvas" moz-opaque="true" tabindex="1">
+      <canvas id="canvas" moz-opaque="true" tabindex="1">
         Sorry, but your browser does not support WebGL or does not have it
         enabled.  To get a WebGL-enabled browser, please see:<br/>
         <a href="http://www.khronos.org/webgl/wiki/Getting_a_WebGL_Implementation" target="_blank">
           Getting a WebGL Implementation
         </a>
       </canvas>
-      <!--
-      <div id="fullscreen" class="screenwrap">
-        <div id="play" class="screen vflex">
-          <div class="flexcenter" style="flex:1; text-align: center;"></div>
-          <div class="hflex" id="something">Maybe put UI here</div>
-          <div class="flexcenter" style="flex:1; text-align: center;"></div>
+      <div id="loading" class="screenwrap vflex">
+        <div class="flexcenter" style="flex:2"></div>
+        <div class="flexcenter" style="flex:1; text-align: center;" id="loading_text">
+          Loading...
         </div>
       </div>
-      -->
     </div>
+    <!-- build:js vendor/combined.js -->
+    <!-- script src="vendor/jquery-3.2.1.min.js"></script -->
+    <!-- endbuild -->
 
     <script src="wrapper.bundle.js"></script>
   </body>
