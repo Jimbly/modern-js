@@ -5,12 +5,15 @@ module.exports = {
   "env": {
     "es6": true,
     "node": true,
-    "browser": true,
+    // "browser": true, // Don't set this, it masks undefined variables named "status", etc
   },
   "globals": {
     // Just the super-common ones, don't mask undefined variables named "status", etc
     "window": true,
     "document": true,
+    "Blob": true,
+    "Image": true,
+    "FileReader": true,
   },
   "extends": "eslint:recommended",
   "parserOptions": {
@@ -19,7 +22,7 @@ module.exports = {
   },
   "rules": {
     "accessor-pairs": "error",
-    "array-bracket-newline": "error",
+    "array-bracket-newline": ["error", "consistent"], // JE
     "array-bracket-spacing": ignore_style ? "off" : [
       "error",
       "never"
@@ -194,6 +197,7 @@ module.exports = {
     "no-confusing-arrow": "error",
     "no-console": "off", // JE
     "no-const-assign": "error",
+    "no-constant-condition": "off", // JE
     "no-control-regex": "error",
     "no-continue": "off", // JE
     "no-debugger": "error",
@@ -415,7 +419,7 @@ module.exports = {
     "require-atomic-updates": "error",
     "require-await": "error",
     "require-jsdoc": "off",
-    "require-unicode-regexp": "error",
+    "require-unicode-regexp": "off", // JE: Hasn't caught anything useful, generates bigger code
     "rest-spread-spacing": "error",
     "semi": "error",
     "semi-spacing": "error",

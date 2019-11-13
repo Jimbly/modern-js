@@ -1,8 +1,9 @@
 /* eslint no-alert:off, consistent-return:off */
 (function () {
   let debug = document.getElementById('debug');
-  window.onerror = function (e, file, line) {
-    debug.innerText = `${e}\n  at ${file}(${line})`;
+  window.onerror = function (e, file, line, col, errorobj) {
+    let msg = errorobj && errorobj.stack || `${e}\n  at ${file}(${line}:${col})`;
+    debug.innerText = `${msg}\n`;
   };
   window.debugmsg = function (msg) {
     debug.innerText += `${msg}\n`;

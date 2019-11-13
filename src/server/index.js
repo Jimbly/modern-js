@@ -1,11 +1,18 @@
+const argv = require('minimist')(process.argv.slice(2));
 const express = require('express');
+const express_static_gzip = require('express-static-gzip');
+const http = require('http');
 const path = require('path');
 
 let app = express();
-app.use(express.static(path.join(__dirname, '../client/')));
+let server = new http.Server(app);
+app.use(express_static_gzip(path.join(__dirname, '../client/'), {
+  enableBrotli: true,
+  orderPreference: ['br'],
+}));
 
-let port = process.env.port || 3000;
+let port = argv.port || process.env.port || 3000;
 
-app.listen(port, () => {
-  console.log(`Running server at http://localhost:${port}`);
+server.listen(port, () => {
+  console.info(`Running server at http://localhost:${port}`);
 });

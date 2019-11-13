@@ -2,7 +2,8 @@ artifacts/
 node_modules/
 ynpm-debug.log
 npm-debug.log
-build/
+build.dev/
+build.prod/
 *.sublime-workspace
 Bfxr
 *.00?
